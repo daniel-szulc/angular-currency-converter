@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import "styles/mixins";
+@import "styles/dropdown";
+
+$blue:  rgba(85,88,218,1) ;
+$red: #ff5858;
+$bright-blue: rgba(95,209,249,1) ;
+
+$dirty-white: #EFEFEFFF;
+$brown: #3a3636;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+body, html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: radial-gradient( circle farthest-corner at 12.3% 19.3%, $blue 0%, $bright-blue 100.2%);
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "../node_modules/bootstrap/scss/bootstrap";

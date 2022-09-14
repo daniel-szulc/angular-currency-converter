@@ -1,0 +1,57 @@
+@import "../styles";
+
+$blue: #0052D4;
+$red: #ff5858;
+$bright-blue: #65C7F7;
+$brighter-blue:#9CECFB;
+$dirty-white: #EFEFEFFF;
+$brown: #3a3636;
+
+.container{
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.form-currency{
+  display: grid;
+  gap: 4px 16px;
+  grid-auto-flow: column;
+  grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr);
+  grid-template-rows: auto [input-row-start] auto;
+}
+
+.card {
+  justify-content: center;
+  align-items: center;
+  background-color: $dirty-white;
+  width: 300px;
+  height: 430px;
+  box-shadow: 0 0 10px 1px rgba(0 0 0 / 20%);
+  border-radius: 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+
+  @include extra-small {
+    width: 100%;
+  }
+  @include medium-only {
+    width: 500px;
+  }
+  @include medium-only {
+    width: 750px;
+  }
+  @include large-only {
+    width: 950px;
+  }
+  @include extra-large {
+    width: 1150px;
+  }
+}
