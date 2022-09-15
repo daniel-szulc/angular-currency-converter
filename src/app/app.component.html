@@ -1,66 +1,36 @@
 
 <div class="container">
   <div class="card">
-    <div class="form-currency">
+    <form name="form-exchange" class="form-currency" #formExchange (window:resize)="windowResize()">
+
     <label>Amount</label>
 
-    <div class="dropdown">
-      <div class="" data-bs-toggle="dropdown" aria-expanded="false">
-      <button *ngIf="edited" class="btn" (click)="dropClick()" type="button">
-        <img [src]="'assets/flags/'+ selectedCurrency.flag"/>
-        <div>{{selectedCurrency.name}} - {{selectedCurrency.full_name}}</div>
-        <i class="toggle bi bi-caret-down"></i>
-      </button>
-
-      <input *ngIf="!edited" (focusout)="deselectSearch()"  [(ngModel)]="findCurrency" (ngModelChange)="valueFinding()" type="text" autofocus #search_input >
+      <div>
+      <div class="input-amount input-field">
+        <span class="prefix">{{from_symbol}}</span>
+      <input required  type="number" [(ngModel)]="amount_value" name="amount" (focusout)="focusOutInput()" #amount_input placeholder="Amount" step="0.01" >
       </div>
-        <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
-          <li *ngFor="let currency of currencies" #currenciesRef>
-         <app-currencies [currency]="currency" [selectCurrency]="selectCurrency"></app-currencies>
-        </li>
-      </ul>
-    </div>
 
+      </div>
     <label>From</label>
 
-    <div class="dropdown">
-      <div class="" data-bs-toggle="dropdown" aria-expanded="false">
-        <button *ngIf="edited" class="btn" (click)="dropClick()" type="button">
-          <img [src]="'assets/flags/'+ selectedCurrency.flag"/>
-          <div>{{selectedCurrency.name}} - {{selectedCurrency.full_name}}</div>
-          <i class="toggle bi bi-caret-down"></i>
-        </button>
 
-        <input *ngIf="!edited" (focusout)="deselectSearch()"  [(ngModel)]="findCurrency" (ngModelChange)="valueFinding()" type="text" autofocus #search_input >
-      </div>
-      <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
-        <li *ngFor="let currency of currencies" #currenciesRef>
-          <app-currencies [currency]="currency" [selectCurrency]="selectCurrency"></app-currencies>
-        </li>
-      </ul>
-    </div>
+    <app-currency-selector #from [selectorId]="'from'" [changeCurrency]="selectFrom"></app-currency-selector>
 
     <div></div>
-    <div>Reverse</div>
+
+        <button class="switch-btn" (click)="switchCurrencies()">
+          <i class="bi bi-arrow-left-right"></i>
+        </button>
 
     <label>To</label>
 
-    <div class="dropdown">
-      <div class="" data-bs-toggle="dropdown" aria-expanded="false">
-        <button *ngIf="edited" class="btn" (click)="dropClick()" type="button">
-          <img [src]="'assets/flags/'+ selectedCurrency.flag"/>
-          <div>{{selectedCurrency.name}} - {{selectedCurrency.full_name}}</div>
-          <i class="toggle bi bi-caret-down"></i>
-        </button>
 
-        <input *ngIf="!edited" (focusout)="deselectSearch()"  [(ngModel)]="findCurrency" (ngModelChange)="valueFinding()" type="text" autofocus #search_input >
-      </div>
-      <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
-        <li *ngFor="let currency of currencies" #currenciesRef>
-          <app-currencies [currency]="currency" [selectCurrency]="selectCurrency"></app-currencies>
-        </li>
-      </ul>
-    </div>
+      <app-currency-selector #to [selectorId]="'to'" [changeCurrency]="selectTo"></app-currency-selector>
+    </form>
+
+    <div class="submit-btn" [style.width.px]="formExchange.offsetWidth" #submitBtn>
+      <button>Convert</button>
     </div>
   </div>
 </div>

@@ -1,13 +1,9 @@
 import {
   AfterViewInit, ChangeDetectorRef,
   Component,
-  Directive,
-  ElementRef,
-  Input,
-  OnInit, Output,
-  QueryList,
+
+  OnInit,
   ViewChild,
-  ViewChildren, ViewContainerRef
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {Currency} from "./Currency";
@@ -20,50 +16,60 @@ import {CURRENCIES} from "./mock-currency";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  title = 'currency-exchange';
-  public edited = true;
-  currencies = CURRENCIES;
-  public selectedCurrency: Currency = CURRENCIES[0];
-  @ViewChild('search_input', {static: false}) search_input;
-  @ViewChild('currenciesRef', { static: true }) currenciesRef;
 
+  title = 'currency-exchange';
+
+  private _from=CURRENCIES[0];
+  private to=CURRENCIES[1];
+  public amount_value;
+  @ViewChild('from') fromCmp;
+  @ViewChild('to') toCmp;
+  @ViewChild('amount_input', {static: false}) amount_input;
+  @ViewChild('submitBtn', {static: false}) submitBtn;
+  @ViewChild('formExchange', {static: false}) formExchange;
+  get from_symbol() {
+    return this._from.symbol;
+  }
  // selectedCurrency: Currency = CURRENCIES[0];
 
   constructor(private modalService: NgbModal, private changeDetector: ChangeDetectorRef) {
-    this.selectedCurrency = CURRENCIES[0];
+
   }
+
 
   public open(modal: any): void {
     this.modalService.open(modal);
   }
-//  @Output() valueFinding;
 
-  public findCurrency;
-
-  public valueFinding() {
-
-    console.log(CURRENCIES[0].name);
-    console.log(this.findCurrency);
-    this.currencies = CURRENCIES.filter(item => item.name.toLowerCase().includes(this.findCurrency.toLowerCase()) || item.full_name.toLowerCase().includes(this.findCurrency.toLowerCase()));
-    console.log(this.currencies);
+  public selectFrom = (currency: Currency): void =>{
+    this._from=currency;
 
   }
 
- selectCurrency = (currency: Currency): void =>{
-   this.selectedCurrency = currency;
- }
-
-  dropClick(){
-    this.edited = false;
-    this.changeDetector.detectChanges();
-    this.search_input.nativeElement.focus();
+  public selectTo = (currency: Currency): void =>{
+    this.to=currency;
   }
-  deselectSearch(){
-    this.edited = true;
+
+  public focusOutInput(){
+    this.amount_value = (Math.round( this.amount_value * 100) / 100).toFixed(2);
+  }
+
+  public switchCurrencies(){
+    console.log("HELLO")
+    let temp : Currency = this._from;
+    console.log(temp);
+    console.log(this.to);
+    this.fromCmp.selectCurrency(this.to);
+
+    this.toCmp.selectCurrency(temp);
   }
 
   ngOnInit(): void {
-   // this.viewContainerRef.createEmbeddedView(this.currenciesRef);
+    this.amount_value=(1).toFixed(2);
+  }
+
+  windowResize(): void{
+    this.submitBtn.nativeElement.style.width = this.formExchange.nativeElement.style.width;
   }
 
   ngAfterViewInit(): void {

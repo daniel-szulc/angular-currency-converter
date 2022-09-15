@@ -1,6 +1,6 @@
 @import "../styles";
 
-$blue: #0052D4;
+$blue: #417de0;
 $red: #ff5858;
 $bright-blue: #65C7F7;
 $brighter-blue:#9CECFB;
@@ -15,12 +15,111 @@ $brown: #3a3636;
   left: 50%;
 }
 
+.input-amount{
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  .prefix {
+    font-weight: 300;
+    color: #999;
+  }
+  input {
+    flex-grow: 1;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+  }
+  &:focus-within {
+    border-color: #777;
+  }
+}
+
+.submit-btn {
+
+  text-align: right;
+  justify-content: end;
+
+  margin-top: 20px;
+  @include medium-down {
+    text-align: center;
+    justify-content: center;
+  }
+  button{
+    text-align: center;
+    width: 160px;
+    height: 50px;
+    border-radius: 5px;
+    color: white;
+    font-weight:500;
+    background-color: $bright-blue;
+
+      transition: 0.5s;
+
+
+    &:hover{
+      background-color: $blue;
+      transition: 0.5s;
+
+      outline: 2px solid rgb(153, 153, 245);
+      border: none;
+      a, i{
+        &.bi{
+          color:  rgb(153, 153, 245);
+        }
+      }
+    }
+  }
+
+
+}
+
 .form-currency{
   display: grid;
   gap: 4px 16px;
   grid-auto-flow: column;
   grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr);
   grid-template-rows: auto [input-row-start] auto;
+
+
+  @include extra-small {
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    grid-auto-flow: row;
+    grid-template-columns: auto ;
+    grid-template-rows: auto;
+    label{
+      margin-bottom:-8px;
+    }
+  }
+  @include small-up {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    grid-auto-flow: row;
+    grid-template-columns: auto [input-row-start] auto;
+    grid-template-rows: minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr);
+  }
+
+  @include medium-up {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    grid-auto-flow: row;
+    grid-template-columns: auto [input-row-start] auto;
+    grid-template-rows: minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr);
+  }
+
+  @include large-up {
+    display: grid;
+    gap: 4px 16px;
+    grid-auto-flow: column;
+    grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr);
+    grid-template-rows: auto [input-row-start] auto;
+  }
 }
 
 .card {
@@ -35,20 +134,35 @@ $brown: #3a3636;
   top: 50%;
   left: 50%;
 
+  .switch-btn{
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    text-align: center;
+    border-radius: 50%;
+    outline: 2px solid #d2d2d2;
+    &:hover{
+      outline: 2px solid rgb(153, 153, 245);
+    }
+  }
 
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 
   @include extra-small {
     width: 100%;
+    height: 100%;
+    border-radius: 0;
   }
-  @include medium-only {
-    width: 500px;
+  @include small-up {
+    width: 400px;
+    height: 460px;
   }
-  @include medium-only {
-    width: 750px;
+  @include medium-up {
+    width: 440px;
+    height: 480px;
   }
-  @include large-only {
+  @include large-up {
     width: 950px;
   }
   @include extra-large {
