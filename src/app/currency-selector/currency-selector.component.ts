@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {CURRENCIES} from "../mock-currency";
+/*import {CURRENCIES} from "../mock-currency";*/
 import {Currency} from "../Currency";
+import {CurrencyServiceComponent} from "../currency-service/currency-service.component";
 
 
 @Component({
@@ -14,32 +15,37 @@ export class CurrencySelectorComponent implements OnInit {
   @Input() changeCurrency;
   @Input() selectorId;
 
-  currencies = CURRENCIES;
-  public selectedCurrency: Currency = CURRENCIES[0];
+  currencies;
+
+  public selectedCurrency;
   public elementCurrenciesList;
   public findCurrency;
   public ignoreFocusOut=false;
-
+  public noResultsFind = false;
   @ViewChild('search_input', {static: false}) search_input;
 
-  constructor(private changeDetector: ChangeDetectorRef) {
+  constructor(private changeDetector: ChangeDetectorRef,  public service: CurrencyServiceComponent) {
 
   }
 
 
 
   public valueFinding() {
-    this.currencies = CURRENCIES.filter(item => item.name.toLowerCase().includes(this.findCurrency.toLowerCase()) || item.full_name.toLowerCase().includes(this.findCurrency.toLowerCase()));
+
+    this.currencies=this.service.getCurrencies().filter(item =>
+      item.name.toLowerCase().includes(this.findCurrency.toLowerCase())
+      || item.full_name.toLowerCase().includes(this.findCurrency.toLowerCase())
+    );
+
+    this.noResultsFind = this.currencies.length == 0;
   }
 
 
-
-
   selectCurrency = (currency: Currency): void =>{
-    console.log("currency");
+    console.log(currency);
     this.selectedCurrency = currency;
-    this.HideDropdown();
     this.changeCurrency(currency);
+    this.HideDropdown();
   }
 
   ShowDropdown()
@@ -68,16 +74,32 @@ export class CurrencySelectorComponent implements OnInit {
   focusOutInput(){
     if(!this.ignoreFocusOut)
       this.HideDropdown();
-
   }
 
   ngAfterViewInit(): void{
+
     this.elementCurrenciesList = document.getElementById('currenciesList ' + this.selectorId)
-    console.log(this.elementCurrenciesList);
-    this.selectCurrency(CURRENCIES[0]);
+
+    if(this.selectorId == 'from')
+    {
+      let from = this.service.getCurrencies().find(element => element.name=='EUR');
+      if(from)
+        this.selectCurrency(from);
+    }
+    else
+    {
+      let to = this.service.getCurrencies().find(element => element.name=='USD');
+      if(to)
+        this.selectCurrency(to);
+    }
+
   }
 
   ngOnInit(): void {
+    this.currencies = this.service.getCurrencies();
+
+    this.selectedCurrency = this.service.getCurrencies()[0];
+    this.changeCurrency(this.service.getCurrencies()[0]);
 
   }
 

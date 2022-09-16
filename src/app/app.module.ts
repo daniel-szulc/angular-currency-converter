@@ -5,20 +5,21 @@ import { AppComponent } from './app.component';
 import { CurrenciesComponent } from './currency-selector/currencies/currencies.component';
 import { FormsModule } from '@angular/forms';
 import { CurrencySelectorComponent } from './currency-selector/currency-selector.component';
-
+import { CurrencyServiceComponent } from './currency-service/currency-service.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     CurrenciesComponent,
-    CurrencySelectorComponent
+    CurrencySelectorComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     NgbModule,
-
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CurrencyServiceComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

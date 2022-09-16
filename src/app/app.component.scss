@@ -13,6 +13,7 @@ $brown: #3a3636;
   position: fixed;
   top: 50%;
   left: 50%;
+
 }
 
 .input-amount{
@@ -30,9 +31,13 @@ $brown: #3a3636;
     border: none;
     outline: none;
     padding: 0.5rem;
+    font-weight: 600;
   }
   &:focus-within {
-    border-color: #777;
+
+      background-color: white;
+      outline: 2px solid rgb(153, 153, 245);
+
   }
 }
 
@@ -53,13 +58,14 @@ $brown: #3a3636;
     border-radius: 5px;
     color: white;
     font-weight:500;
-    background-color: $bright-blue;
+    background-color: $blue;
+
 
       transition: 0.5s;
 
 
     &:hover{
-      background-color: $blue;
+      background-color: $bright-blue;
       transition: 0.5s;
 
       outline: 2px solid rgb(153, 153, 245);
@@ -81,7 +87,9 @@ $brown: #3a3636;
   grid-auto-flow: column;
   grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr);
   grid-template-rows: auto [input-row-start] auto;
-
+  label{
+    text-align: left;
+  }
 
   @include extra-small {
     gap: 10px;
@@ -92,6 +100,7 @@ $brown: #3a3636;
     grid-template-columns: auto ;
     grid-template-rows: auto;
     label{
+      text-align: center;
       margin-bottom:-8px;
     }
   }
@@ -105,6 +114,7 @@ $brown: #3a3636;
   }
 
   @include medium-up {
+
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -114,6 +124,9 @@ $brown: #3a3636;
   }
 
   @include large-up {
+    label {
+      text-align: left;
+    }
     display: grid;
     gap: 4px 16px;
     grid-auto-flow: column;
@@ -134,6 +147,19 @@ $brown: #3a3636;
   top: 50%;
   left: 50%;
 
+  h1{
+    font-weight: 800;
+    margin-bottom:20px;
+
+    @include large-up {
+      margin-bottom:60px;
+    }
+
+    @include extra-small {
+      margin-bottom:40px;
+    }
+  }
+
   .switch-btn{
     height: 50px;
     width: 50px;
@@ -144,9 +170,28 @@ $brown: #3a3636;
     &:hover{
       outline: 2px solid rgb(153, 153, 245);
     }
+
+
+    &:active {
+      i:before{
+        animation: flip 0.2s 1 linear;
+      }
+
+     // animation: flip 2s 1 linear;
+    }
+    @keyframes flip {
+      0% {
+          transform: rotateY(0deg);
+      }
+      50% {
+          transform: rotateY(180deg);
+      }
+      to {
+          transform: rotateY(0deg);
+      }
+    }
   }
 
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 
   @include extra-small {
@@ -155,13 +200,10 @@ $brown: #3a3636;
     border-radius: 0;
   }
   @include small-up {
-    width: 400px;
-    height: 460px;
-  }
-  @include medium-up {
     width: 440px;
-    height: 480px;
+    height: 600px;
   }
+
   @include large-up {
     width: 950px;
   }

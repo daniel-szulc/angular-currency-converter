@@ -1,7 +1,7 @@
 
   <a (click)="selectCurrencyFunc(currency)" class="dropdown-item"  href="#">
-    <img src="assets/flags/{{currency.flag}}"/>
-    {{currency.name}} - {{currency.full_name}}
+    <div class="currency-flag currency-flag-{{currency.name.toLowerCase()}}"></div>
+    <div class="currency-name">{{currency.name}}{{currency.full_name ? ' - '+currency.full_name : '' }}</div>
   </a>
 
 

@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "styles/mixins";
 @import "styles/default";
+@import "styles/loading";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import "currency-flags/dist/currency-flags.css";
+
 
 $blue:  rgba(85,88,218,1) ;
 $red: #ff5858;
@@ -11,7 +15,7 @@ $brown: #3a3636;
 
 *, *::before, *::after {
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: bold;
 }
 

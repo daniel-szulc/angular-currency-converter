@@ -7,7 +7,7 @@ import {Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/co
 })
 export class CurrenciesComponent{
 
-  @Input() selectCurrency;//: (currency: Currency) => void;
+  @Input() selectCurrency;
   @Input() currency;
 
 

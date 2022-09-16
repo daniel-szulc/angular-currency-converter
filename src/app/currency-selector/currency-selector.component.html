@@ -1,22 +1,23 @@
 <div class="dropdown">
-  <div class="" data-bs-toggle="dropdown" aria-expanded="false">
+  <div  data-bs-toggle="dropdown" aria-expanded="false">
     <button *ngIf="edited" class="btn" (click)="dropClick()" type="button">
-      <img [src]="'assets/flags/'+ selectedCurrency.flag"/>
-      <div>{{selectedCurrency.name}} - {{selectedCurrency.full_name}}</div>
-      <i class="toggle bi bi-caret-down"></i>
+      <div class="currency-flag currency-flag-{{selectedCurrency.name.toLowerCase()}}"></div>
+      <div class="currency-name">{{selectedCurrency.name}}{{selectedCurrency.full_name ? ' - '+selectedCurrency.full_name : '' }}</div>
+      <i class="toggle bi bi-chevron-down"></i>
     </button>
 
     <div class="input-search" *ngIf="!edited">
-      <input (click)='ShowDropdown()' (keyup.escape)="HideDropdown()"  (focusout)="focusOutInput()" [ngModelOptions]="{standalone: true}"  [(ngModel)]="findCurrency" (ngModelChange)="valueFinding()" type="text" autofocus #search_input>
+      <input (click)='ShowDropdown()'  placeholder="Type to search..." (keyup.escape)="HideDropdown()"  (focusout)="focusOutInput()" [ngModelOptions]="{standalone: true}"  [(ngModel)]="findCurrency" (ngModelChange)="valueFinding()" type="text" autofocus #search_input>
       <a id="clear" href="#" (click)='HideDropdown()'  class="bi bi-x-lg"></a>
     </div>
 
   </div>
 
 
-  <ul [id]="'currenciesList ' + selectorId"  (mouseover)="ignoreFocusOut=true" (mouseout)="ignoreFocusOut=false"  class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
+  <ul [id]="'currenciesList ' + selectorId"  (mouseover)="ignoreFocusOut=currencies.length>0" (mouseout)="ignoreFocusOut=false"  class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
     <li *ngFor="let currency of currencies">
       <app-currencies [currency]="currency" [selectCurrency]="selectCurrency"></app-currencies>
     </li>
+    <li class="info-dropdown-element" *ngIf="noResultsFind">No results available</li>
   </ul>
 </div>

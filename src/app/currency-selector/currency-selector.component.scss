@@ -1,21 +1,50 @@
 
 
-.dropdown-item{
-  padding-inline: 8px;
-
-  img{
-    border-radius: 5px;
-    scale: 60%;
-  }
+.currency-flag{
+  border-radius: 5px;
+  height: 32px;
+  width: 48px;
+  scale: 60%;
+  outline: 1.5px solid #eaeaea;
 }
 
+.dropdown-item{
+  padding-inline: 8px;
+  display: flex;
+  align-items: center;
+
+  div{
+    font-weight: 400;
+  }
+
+}
+
+.currency-name{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 180px;
+}
 
 .dropdown{
 
+  .currency-name{
+    padding-right: 23px;
+    max-width: 210px;
+  }
+
+  .input-search > input{
+    padding-left: 15px;
+    padding-right: 35px;
+
+  }
+
+  .info-dropdown-element{
+    padding-inline: 15px;
+  }
+
   width: 260px;
 
-  img{
-    border-radius: 5px;
+  .currency-flag{
     scale: 70%;
   }
 
@@ -63,6 +92,7 @@
       text-align: left;
       margin-block: auto;
     }
+
 
 
     a, i{

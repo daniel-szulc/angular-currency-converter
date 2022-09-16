@@ -1,3 +1,5 @@
+
+
 .btn, input, .input-field, .switch-btn, button{
   width: 260px;
   height: 50px;
@@ -15,6 +17,10 @@
   outline: 2px solid #d2d2d2;
   border: none;
 
+  &:focus{
+    background-color: white;
+    outline: 2px solid rgb(153, 153, 245);
+  }
 
   &:hover{
     background-color: white;

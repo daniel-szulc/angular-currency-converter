@@ -1,14 +1,15 @@
 
 <div class="container">
-  <div class="card">
-    <form name="form-exchange" class="form-currency" #formExchange (window:resize)="windowResize()">
-
+  <div class="card" >
+    <h1>Currency Converter</h1>
+    <form name="form-exchange" *ngIf="isDataAvailable">
+    <div class="form-currency" #formExchange (window:resize)="windowResize()">
     <label>Amount</label>
 
       <div>
       <div class="input-amount input-field">
         <span class="prefix">{{from_symbol}}</span>
-      <input required  type="number" [(ngModel)]="amount_value" name="amount" (focusout)="focusOutInput()" #amount_input placeholder="Amount" step="0.01" >
+      <input required lang="en-US" type="number" [(ngModel)]="amount_value" name="amount" (focusout)="focusOutInput()" #amount_input placeholder="Amount" step="0.01" >
       </div>
 
       </div>
@@ -27,10 +28,17 @@
 
 
       <app-currency-selector #to [selectorId]="'to'" [changeCurrency]="selectTo"></app-currency-selector>
-    </form>
+    </div>
 
     <div class="submit-btn" [style.width.px]="formExchange.offsetWidth" #submitBtn>
       <button>Convert</button>
+    </div>
+    </form>
+    <div class="lds-ellipsis"  *ngIf="!isDataAvailable && !failedToLoad"><div></div><div></div><div></div><div></div></div>
+    <div *ngIf="failedToLoad" [style.text-align]="'center'">
+    <h2>
+      <i class="bi bi-bug-fill"></i></h2>
+    <h3>Failed to load exchange rate from the server</h3>
     </div>
   </div>
 </div>
