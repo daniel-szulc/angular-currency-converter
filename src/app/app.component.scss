@@ -7,13 +7,144 @@ $brighter-blue:#9CECFB;
 $dirty-white: #EFEFEFFF;
 $brown: #3a3636;
 
+
+
 .container{
   justify-content: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
   align-items: center;
-  position: fixed;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+
+  max-width: none;
+  @include extra-small {
+    background-color: $dirty-white;
+  }
+}
+
+.result-currency{
+  margin-block: 20px;
+  width: 100%;
+
+  @include extra-small {
+  width: 260px;
+  }
+  @include small-up {
+    width: 398px;
+  }
+  @include medium-up {
+    width: 100%;
+  }
+
+  .result-from{
+    font-weight: 800;
+    color: #3a3636;
+  }
+  .result-to{
+    font-size: 2rem;
+    font-weight: 1000;
+    margin-top: 5px;
+    margin-bottom:15px;
+  }
+  .result-info{
+    white-space: pre;
+    font-weight: 500;
+  }
+}
+
+.card {
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+align-items: center;
+  margin: auto;
+  padding: 20px;
 
+  background-color: $dirty-white;
+  width: 300px;
+  height: auto;
+  box-shadow: 0 0 10px 1px rgba(0 0 0 / 20%);
+  border-radius: 15px;
+  //  transform: translate(-50%, -50%);
+
+
+  h1{
+    font-weight: 800;
+    margin-bottom:20px;
+
+    @include large-up {
+      margin-bottom:60px;
+    }
+
+    @include extra-small {
+      margin-bottom:40px;
+    }
+  }
+
+  .switch-btn{
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    text-align: center;
+    border-radius: 50%;
+    outline: 2px solid #d2d2d2;
+    &:hover{
+      outline: 2px solid rgb(153, 153, 245);
+    }
+
+
+    &:active {
+      i:before{
+        animation: flip 0.2s 1 linear;
+      }
+
+      // animation: flip 2s 1 linear;
+    }
+    @keyframes flip {
+      0% {
+        transform: rotateY(0deg);
+      }
+      50% {
+        transform: rotateY(180deg);
+      }
+      to {
+        transform: rotateY(0deg);
+      }
+    }
+  }
+
+
+
+
+  @include extra-small {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    top: auto;
+    left: auto;
+    transform: none;
+
+    background-color: transparent;
+    box-shadow: none;
+
+  }
+  @include small-up {
+    width: 440px;
+  }
+
+  @include large-up {
+    width: 950px;
+    padding-block: 50px;
+  }
+  @include extra-large {
+    width: 1150px;
+    padding-inline: 130px;
+    padding-block: 100px;
+  }
 }
 
 .input-amount{
@@ -135,79 +266,4 @@ $brown: #3a3636;
   }
 }
 
-.card {
-  justify-content: center;
-  align-items: center;
-  background-color: $dirty-white;
-  width: 300px;
-  height: 430px;
-  box-shadow: 0 0 10px 1px rgba(0 0 0 / 20%);
-  border-radius: 15px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
 
-  h1{
-    font-weight: 800;
-    margin-bottom:20px;
-
-    @include large-up {
-      margin-bottom:60px;
-    }
-
-    @include extra-small {
-      margin-bottom:40px;
-    }
-  }
-
-  .switch-btn{
-    height: 50px;
-    width: 50px;
-    margin: auto;
-    text-align: center;
-    border-radius: 50%;
-    outline: 2px solid #d2d2d2;
-    &:hover{
-      outline: 2px solid rgb(153, 153, 245);
-    }
-
-
-    &:active {
-      i:before{
-        animation: flip 0.2s 1 linear;
-      }
-
-     // animation: flip 2s 1 linear;
-    }
-    @keyframes flip {
-      0% {
-          transform: rotateY(0deg);
-      }
-      50% {
-          transform: rotateY(180deg);
-      }
-      to {
-          transform: rotateY(0deg);
-      }
-    }
-  }
-
-  transform: translate(-50%, -50%);
-
-  @include extra-small {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-  }
-  @include small-up {
-    width: 440px;
-    height: 600px;
-  }
-
-  @include large-up {
-    width: 950px;
-  }
-  @include extra-large {
-    width: 1150px;
-  }
-}

@@ -23,7 +23,10 @@ body, html {
   height: 100%;
   padding: 0;
   margin: 0;
+
   background: radial-gradient( circle farthest-corner at 12.3% 19.3%, $blue 0%, $bright-blue 100.2%);
+
+
 }
 
 /* Importing Bootstrap SCSS file. */

@@ -2,7 +2,8 @@
 <div class="container">
   <div class="card" >
     <h1>Currency Converter</h1>
-    <form name="form-exchange" *ngIf="isDataAvailable">
+    <div *ngIf="isDataAvailable">
+    <form name="form-exchange" (ngSubmit)="onSubmit()">
     <div class="form-currency" #formExchange (window:resize)="windowResize()">
     <label>Amount</label>
 
@@ -30,16 +31,32 @@
       <app-currency-selector #to [selectorId]="'to'" [changeCurrency]="selectTo"></app-currency-selector>
     </div>
 
-    <div class="submit-btn" [style.width.px]="formExchange.offsetWidth" #submitBtn>
-      <button>Convert</button>
+    <div class="submit-btn" [style.width.px]="formExchange.offsetWidth" #submitBtn *ngIf="!isResult">
+      <button type="submit">Convert</button>
     </div>
+
     </form>
+      <div class="result-currency" *ngIf="isResult">
+        <div class="result-from">
+          {{resultFrom}}
+          </div>
+
+          <div class="result-to">
+            {{resultTo}}
+            </div>
+            <div class="result-info">
+            {{resultInfo}}
+              </div>
+      </div>
+    </div>
     <div class="lds-ellipsis"  *ngIf="!isDataAvailable && !failedToLoad"><div></div><div></div><div></div><div></div></div>
+
     <div *ngIf="failedToLoad" [style.text-align]="'center'">
     <h2>
       <i class="bi bi-bug-fill"></i></h2>
     <h3>Failed to load exchange rate from the server</h3>
     </div>
+
   </div>
 </div>
 
