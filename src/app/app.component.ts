@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
   Component,
 
   OnInit,
@@ -33,12 +33,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   public resultTo;
   public resultInfo;
   public isResult = false;
-
+  public lastUpdate;
   get from_symbol() {
     return this._from.symbol;
   }
 
-  constructor(private modalService: NgbModal, private changeDetector: ChangeDetectorRef, public service: CurrencyServiceComponent) {
+  constructor(private modalService: NgbModal, public service: CurrencyServiceComponent) {
   }
 
   public open(modal: any): void {
@@ -59,11 +59,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
-  public focusOutInput(){
+  changeAmountValue(){
     this.amount_value = (Math.round( this.amount_value * 100) / 100).toFixed(2);
+    localStorage.setItem("amount", this.amount_value);
     if(this.isResult)
       this.exchange();
   }
+
 
   public switchCurrencies(){
     let temp : Currency = this._from;
@@ -76,15 +78,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   public exchange(){
     let rateBase = this.to.rate/this._from.rate;
     let result = this.amount_value*rateBase;
-    this.resultFrom = this.amount_value + " " + this._from.full_name + " =";
-    this.resultTo = (result).toFixed(5) + " " + this.to.full_name;
-    this.resultInfo = (1).toFixed(2) + " " + this._from.name + " = " + rateBase + " " +this.to.name + '\n '
-                      +  (1).toFixed(2) + " " + this.to.name + " = " + 1/rateBase + " " +this._from.name ;
+    this.resultFrom = this.amount_value + " " + (this._from.full_name ? this._from.full_name :  this._from.name) + " =";
+    this.resultTo = (result).toFixed(5) + " " + (this.to.full_name ? this.to.full_name :  this.to.name);
+    this.resultInfo = (1).toFixed(2) + " " + this._from.name + " = " + rateBase.toFixed(6) + " " +this.to.name + '\n '
+                      +  (1).toFixed(2) + " " + this.to.name + " = " + (1/rateBase).toFixed(6) + " " +this._from.name ;
   }
 
   onSubmit(): void {
-      this.exchange();
-      this.isResult= true;
+    this.exchange();
+    this.isResult= true;
+    var date = new Date(this.service.getLastUpdate());
+    this.lastUpdate = date.toLocaleString()  + " UTC";
   }
 
   ngOnInit(): void {
@@ -94,13 +98,16 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.isDataAvailable = true
 
     },
-      (reject) =>{
+      () =>{
       this.failedToLoad = true;
       }
     );
 
-    this.amount_value=(1).toFixed(2);
+    let localAmount = localStorage.getItem("amount");
+    this.amount_value= localAmount ? localAmount : (1).toFixed(2);
   }
+
+
 
   windowResize(): void{
     this.submitBtn.nativeElement.style.width = this.formExchange.nativeElement.style.width;

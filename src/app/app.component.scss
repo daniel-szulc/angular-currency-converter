@@ -18,10 +18,14 @@ $brown: #3a3636;
   overflow: auto;
   height: 100%;
   width: 100%;
-
+  min-height: 570px;
   max-width: none;
   @include extra-small {
     background-color: $dirty-white;
+  }
+
+  @include medium-down{
+    min-height: 710px;
   }
 }
 
@@ -69,8 +73,6 @@ align-items: center;
   height: auto;
   box-shadow: 0 0 10px 1px rgba(0 0 0 / 20%);
   border-radius: 15px;
-  //  transform: translate(-50%, -50%);
-
 
   h1{
     font-weight: 800;
@@ -263,6 +265,39 @@ align-items: center;
     grid-auto-flow: column;
     grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr);
     grid-template-rows: auto [input-row-start] auto;
+  }
+
+
+}
+
+.lastUpdate{
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  font-weight: 400;
+  color: #3a3636;
+
+}
+.madeBy{
+  a{
+    color: white;
+    &:hover{
+      color: $dirty-white;
+    }
+  }
+  color: white;
+  position: absolute;
+  right:15px;
+  bottom:-35px;
+
+  @include extra-small {
+    color: black;
+    a{
+      color: black;
+      &:hover{
+        color: #3a3636;
+      }
+    }
   }
 }
 

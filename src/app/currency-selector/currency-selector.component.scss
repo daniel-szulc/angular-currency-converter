@@ -29,7 +29,7 @@
 
   .currency-name{
     padding-right: 23px;
-    max-width: 210px;
+    max-width: 196px;
   }
 
   .input-search > input{
@@ -54,30 +54,6 @@
     overflow-x: hidden;
     width: 100%;
   }
-
-
-
-/*  .btn, input{
-    width: 260px;
-    height: 50px;
-    border-radius: 5px;
-    text-align: left;
-    justify-content: center;
-    outline: none;
-    padding: 8px;
-    font-weight: 200;
-    letter-spacing: 1px;
-    background-color: white;
-    -webkit-box-shadow: 0px 0px 19px -12px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 19px -12px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 19px -12px rgba(0, 0, 0, 0.5);
-    border: 2px solid #d2d2d2;
-
-    &:hover {
-      background-color: white;
-      border: 2px solid rgb(153, 153, 245);
-    }
-  }*/
 
   .btn, .input-search {
     white-space: nowrap;

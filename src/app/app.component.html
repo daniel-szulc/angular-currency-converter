@@ -10,7 +10,7 @@
       <div>
       <div class="input-amount input-field">
         <span class="prefix">{{from_symbol}}</span>
-      <input required lang="en-US" type="number" [(ngModel)]="amount_value" name="amount" (focusout)="focusOutInput()" #amount_input placeholder="Amount" step="0.01" >
+      <input required lang="en-US" type="number" [(ngModel)]="amount_value" (change)="changeAmountValue()" name="amount" (focusout)="changeAmountValue()" #amount_input placeholder="Amount" step="0.01" >
       </div>
 
       </div>
@@ -21,7 +21,7 @@
 
     <div></div>
 
-        <button class="switch-btn" (click)="switchCurrencies()">
+        <button class="switch-btn" type="button" (click)="switchCurrencies()">
           <i class="bi bi-arrow-left-right"></i>
         </button>
 
@@ -57,7 +57,14 @@
     <h3>Failed to load exchange rate from the server</h3>
     </div>
 
+    <div class="lastUpdate" *ngIf="isResult">
+      Last updated: {{lastUpdate}}
+    </div>
+
+    <div class="madeBy">Made by <a href="https://github.com/daniel-szulc/angular-currency-converter" target="_blank">Daniel Szulc</a></div>
+
   </div>
+
 </div>
 
 

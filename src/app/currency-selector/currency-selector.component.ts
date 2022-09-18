@@ -42,10 +42,11 @@ export class CurrencySelectorComponent implements OnInit {
 
 
   selectCurrency = (currency: Currency): void =>{
-    console.log(currency);
     this.selectedCurrency = currency;
     this.changeCurrency(currency);
     this.HideDropdown();
+
+    localStorage.setItem(this.selectorId, currency.name);
   }
 
   ShowDropdown()
@@ -76,22 +77,21 @@ export class CurrencySelectorComponent implements OnInit {
       this.HideDropdown();
   }
 
+  private selectCurrencyOnStart(){
+    let data
+    let localData = localStorage.getItem(this.selectorId);
+    if(localData)
+      data = this.service.getCurrencies().find(element => element.name==localData);
+    if(!data)
+      data = this.service.getCurrencies().find(element => element.name==(this.selectorId == 'from' ? 'EUR' : 'USD'));
+    if(data)
+    this.selectCurrency(data);
+  }
+
   ngAfterViewInit(): void{
 
     this.elementCurrenciesList = document.getElementById('currenciesList ' + this.selectorId)
-
-    if(this.selectorId == 'from')
-    {
-      let from = this.service.getCurrencies().find(element => element.name=='EUR');
-      if(from)
-        this.selectCurrency(from);
-    }
-    else
-    {
-      let to = this.service.getCurrencies().find(element => element.name=='USD');
-      if(to)
-        this.selectCurrency(to);
-    }
+    this.selectCurrencyOnStart();
 
   }
 
