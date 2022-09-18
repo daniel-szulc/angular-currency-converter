@@ -19,10 +19,9 @@ Please check out [the demo](https://daniel-szulc.github.io/angular-currency-conv
 
 ## Screenshots
 
-<center>
 <img src="/screenshot1.png" alt="Currency converter"/>
+
 <img src="/screenshot2.png" alt="Currency converter"/>
-</center>
 
 ## Features
 
@@ -42,4 +41,4 @@ Please check out [the demo](https://daniel-szulc.github.io/angular-currency-conv
 
 ## License
 
-MIT © [Daniel Szulc](https://github.com/daniel-szulc.github.io/angular-currency-converter/blob/master/LICENSE.md)
+MIT © [Daniel Szulc](https://github.com/daniel-szulc/angular-currency-converter/blob/master/LICENSE.md)
